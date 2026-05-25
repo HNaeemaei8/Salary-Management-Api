@@ -1,0 +1,26 @@
+﻿version: '3.8'
+
+services:
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=123456@Passw0rd
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+  api:
+    build: . 
+    ports:
+      - "8080:8080"
+    environment:
+
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=EmployeeSalaryDb;User Id=sa;Password=YourStrong@Passw0rd;TrustServerCertificate=True
+    depends_on:
+      - sqlserver
+
+volumes:
+  sqlserver_data:
