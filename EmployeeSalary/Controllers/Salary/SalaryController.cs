@@ -69,10 +69,6 @@ namespace Servicehost.Controllers
             return Ok(salary);
         }
 
-        /// <summary>
-        /// دریافت لیست حقوق‌های یک کارمند خاص در یک بازه زمانی.
-        /// GET: api/Salary/employee/{employeeId}?startDate=YYYY-MM-DD&endDate=YYYY-MM-DD
-        /// </summary>
         [HttpGet("employee/{employeeId}")]
         [ProducesResponseType(typeof(List<Salary>), StatusCodes.Status200OK)] 
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -83,10 +79,6 @@ namespace Servicehost.Controllers
             return Ok(salaries ?? new List<Salary>()); 
         }
 
-        /// <summary>
-        /// به‌روزرسانی اطلاعات یک رکورد حقوق.
-        /// PUT: api/Salary/{id}
-        /// </summary>
         [HttpPut("{id}")]
         [ProducesResponseType(typeof(Salary), StatusCodes.Status200OK)] 
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
