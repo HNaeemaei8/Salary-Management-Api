@@ -1,23 +1,36 @@
-<<<<<<< HEAD
-# EmployeeSalary
+﻿# Salary Management API
 
-## Description
-This project is a web API for managing employee salary policies.
+این پروژه یک **ASP.NET Core Web API** برای مدیریت جامع سیستم حقوق و دستمزد است که با هدف سازماندهی دقیق اطلاعات مالی پرسنل، محاسبه پرداختی‌ها و کسورات طراحی شده است.
 
-## Repository
-https://github.com/HNaeemaei8/EmployeeSalary
+---
 
-## Staging URL
-TBD
+##  ویژگی‌های کلیدی
+- **مدیریت پرسنل:** ثبت و ویرایش اطلاعات کارمندان.
+- **پردازش حقوق:** محاسبه مبالغ حقوق و کسورات مربوطه.
+- **مستندات API:** استفاده از **Swagger** برای تست و مشاهده تمامی Endpointها.
+- **معماری ماژولار:** طراحی شده جهت توسعه‌پذیری و نگهداری آسان.
 
-## Requirements
-- .NET 9 SDK
-- Docker
+---
 
-## Run
+##  تکنولوژی‌های استفاده‌شده
+- `.NET 8/9` (بسته به نسخه پروژه‌ات)
+- `ASP.NET Core Web API`
+- `Entity Framework Core`
+- `SQL Server`
+- `Swagger / OpenAPI`
+
+---
+
+##  پیش‌نیازها
+قبل از اجرا، اطمینان حاصل کنید که ابزارهای زیر نصب هستند:
+- [.NET SDK](https://dotnet.microsoft.com/download)
+- [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/) یا [VS Code](https://code.visualstudio.com/)
+
+---
+
+
+## دریافت پروژه
 ```bash
-dotnet run
-=======
-# Salary-Management-Api
-salarymanagement
->>>>>>> a100fb3bfdef483bf7fc6f74ade95063e68b832a
+git clone https://github.com/HNaeemaei8/salary-management-api.git
+cd salary-management-api
