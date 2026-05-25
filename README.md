@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # EmployeeSalary
 
 ## Description
@@ -16,3 +17,7 @@ TBD
 ## Run
 ```bash
 dotnet run
+=======
+# Salary-Management-Api
+salarymanagement
+>>>>>>> a100fb3bfdef483bf7fc6f74ade95063e68b832a
