@@ -1,4 +1,4 @@
-﻿namespace EmployeeSalary.Application.Dto
+﻿namespace Application.Dto
 {
         public class SalaryCalculationRequest
         {

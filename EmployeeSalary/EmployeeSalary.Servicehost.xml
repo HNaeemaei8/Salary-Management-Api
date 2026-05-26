@@ -4,12 +4,5 @@
         <name>Servicehost</name>
     </assembly>
     <members>
-        <!-- Badly formed XML comment ignored for member "M:Servicehost.Controllers.SalaryController.GetSalariesForEmployee(System.Int32,System.DateTime,System.DateTime)" -->
-        <member name="M:Servicehost.Controllers.SalaryController.UpdateSalary(System.Int32,Application.Application.Dto.SalaryUpdateData)">
-            <summary>
-            به‌روزرسانی اطلاعات یک رکورد حقوق.
-            PUT: api/Salary/{id}
-            </summary>
-        </member>
     </members>
 </doc>

@@ -1,11 +1,7 @@
-﻿using EmployeeSalary.Application.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Application.Dto;
 
-namespace Application.Application.Interfaces
+
+namespace Application.Interfaces
 {
     public interface ISalaryCalculationService
     {

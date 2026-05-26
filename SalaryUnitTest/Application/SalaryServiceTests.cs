@@ -1,9 +1,9 @@
-﻿using Application.Application.Dto;
+﻿using Application.Dto;
 using Application.Interfaces;
-using EmployeeSalary.Application.Dto;
+using Application.Dto;
 using EmployeeSalary.Application.Implementations;
-using EmployeeSalary.Domain.Entities;
-using EmployeeSalary.Domain.Interfaces;
+using Domain.Entities;
+using Domain.Interfaces;
 using Moq;
 using Xunit;
 

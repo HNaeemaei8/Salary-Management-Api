@@ -1,7 +1,7 @@
 ﻿using Dapper;
-using EmployeeSalary.Domain.Entities;
-using EmployeeSalary.Domain.Interfaces;
-using EmployeeSalary.Infrastructure.Context;
+using Domain.Interfaces;
+using Domain.Entities;
+using Infrastructure.Context;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 

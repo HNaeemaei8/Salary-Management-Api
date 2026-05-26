@@ -1,5 +1,5 @@
-﻿using EmployeeSalary.Domain.Entities;
-using EmployeeSalary.Infrastructure.Context;
+﻿using Domain.Entities;
+using Infrastructure.Context;
 using EmployeeSalary.Infrastucture.Repositories;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;

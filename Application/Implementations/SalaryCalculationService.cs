@@ -1,6 +1,6 @@
 ﻿
-using Application.Application.Interfaces;
-using EmployeeSalary.Application.Dto;
+using Application.Interfaces;
+using Application.Dto;
 using Microsoft.Extensions.Logging;
 using OvetimePolicies;
 using System.Reflection;

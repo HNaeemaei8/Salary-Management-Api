@@ -1,5 +1,5 @@
-﻿using Application.Interfaces;
-using EmployeeSalary.Application.Dto;
+﻿using Application.Dto;
+using Application.Interfaces;
 using System.Text.Json;
 
 namespace Infrastucture.Common

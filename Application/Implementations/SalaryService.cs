@@ -1,8 +1,7 @@
-﻿using Application.Application.Dto;
+﻿using Application.Dto;
 using Application.Interfaces;
-using EmployeeSalary.Application.Dto;
-using EmployeeSalary.Domain.Entities;
-using EmployeeSalary.Domain.Interfaces;
+using Domain.Entities;
+using Domain.Interfaces;
 
 
 namespace EmployeeSalary.Application.Implementations

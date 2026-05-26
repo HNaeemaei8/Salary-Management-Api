@@ -1,8 +1,6 @@
-﻿using Application.Application.Dto;
-using Application.Application.Interfaces;
-using Application.Interfaces; 
-using EmployeeSalary.Application.Dto; 
-using EmployeeSalary.Domain.Entities;
+﻿using Application.Dto;
+using Application.Interfaces;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Servicehost.Controllers 

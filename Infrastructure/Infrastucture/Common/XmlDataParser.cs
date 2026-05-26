@@ -1,5 +1,5 @@
 ﻿using Application.Interfaces;
-using EmployeeSalary.Application.Dto;
+using Application.Dto;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 

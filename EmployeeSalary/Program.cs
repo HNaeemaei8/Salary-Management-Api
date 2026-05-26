@@ -1,8 +1,7 @@
-﻿using Application.Application.Interfaces;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using EmployeeSalary.Application.Implementations;
-using EmployeeSalary.Domain.Interfaces;
-using EmployeeSalary.Infrastructure.Context;
+using Domain.Interfaces;
+using Infrastructure.Context;
 using EmployeeSalary.Infrastucture.Repositories;
 using Infrastructure.Common;
 using Infrastructure.Infrastucture.Common;

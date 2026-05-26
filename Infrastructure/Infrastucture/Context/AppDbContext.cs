@@ -1,7 +1,7 @@
-﻿using EmployeeSalary.Domain.Entities;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EmployeeSalary.Infrastructure.Context
+namespace Infrastructure.Context
 {
     public class AppDbContext : DbContext
     {

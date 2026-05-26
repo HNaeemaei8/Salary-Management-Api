@@ -1,4 +1,4 @@
-﻿using EmployeeSalary.Application.Dto;
+﻿using Application.Dto;
 
 namespace Application.Interfaces
 {

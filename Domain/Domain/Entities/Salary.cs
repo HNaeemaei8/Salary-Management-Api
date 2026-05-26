@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace EmployeeSalary.Domain.Entities
+﻿
+namespace Domain.Entities
 {
     public class Salary
     {

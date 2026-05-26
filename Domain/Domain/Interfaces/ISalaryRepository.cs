@@ -1,6 +1,6 @@
-﻿using EmployeeSalary.Domain.Entities;
+﻿using Domain.Entities;
 
-namespace EmployeeSalary.Domain.Interfaces
+namespace Domain.Interfaces
 {
         public interface ISalaryRepository
         {

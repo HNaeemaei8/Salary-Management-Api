@@ -1,7 +1,6 @@
 ﻿
-using Application.Application.Dto;
-using EmployeeSalary.Application.Dto;
-using EmployeeSalary.Domain.Entities;
+using Application.Dto;
+using Domain.Entities;
 
 namespace Application.Interfaces
 {

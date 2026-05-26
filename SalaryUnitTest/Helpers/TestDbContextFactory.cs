@@ -1,4 +1,4 @@
-﻿using EmployeeSalary.Infrastructure.Context;
+﻿using Infrastructure.Context;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 
