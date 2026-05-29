@@ -1,6 +1,5 @@
 ﻿using Application.Dto;
 using Application.Interfaces;
-using Application.Dto;
 using EmployeeSalary.Application.Implementations;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -12,14 +11,14 @@ namespace EmployeeSalary.Tests;
 public class SalaryServiceTests
 {
     private readonly Mock<ISalaryRepository> _salaryRepositoryMock;
-    private readonly Mock<IDataParserFactory> _parserFactoryMock; 
+    private readonly Mock<IDataParserFactory> _parserFactoryMock;
     private readonly SalaryService _salaryService;
-    private readonly decimal _fixedHourlyRate = 10000; 
+    private readonly decimal _fixedHourlyRate = 10000;
 
     public SalaryServiceTests()
     {
         _salaryRepositoryMock = new Mock<ISalaryRepository>();
-        _parserFactoryMock = new Mock<IDataParserFactory>(); 
+        _parserFactoryMock = new Mock<IDataParserFactory>();
 
         _salaryService = new SalaryService(
             _salaryRepositoryMock.Object,
@@ -31,6 +30,8 @@ public class SalaryServiceTests
     public async Task AddSalaryAsync_ShouldCreateSalaryAndCallRepository()
     {
         // Arrange
+        var fixedDate = new DateTime(2025, 01, 01);
+
         var request = new SalaryCalculationRequest
         {
             EmployeeFirstName = "Test",
@@ -38,28 +39,38 @@ public class SalaryServiceTests
             BaseSalary = 5000,
             AttractionAllowance = 500,
             TransportationAllowance = 200,
-            OvertimeHours = 3, 
-            SalaryDate = DateTime.Now,
+            OvertimeHours = 3,
+            SalaryDate = fixedDate,
             OverTimeCalculatorMethod = "Standard"
         };
 
-        _salaryRepositoryMock.Setup(repo => repo.AddAsync(It.IsAny<Salary>()))
-                           .Returns(Task.FromResult(new Salary())); 
+        _salaryRepositoryMock
+            .Setup(repo => repo.AddAsync(It.IsAny<Salary>()))
+            .Returns(Task.CompletedTask);
 
         // Act
         var result = await _salaryService.AddSalaryAsync(request);
 
-        // Assert
+        // Assert - خروجی
         Assert.NotNull(result);
         Assert.Equal("Test", result.EmployeeFirstName);
         Assert.Equal("User", result.EmployeeLastName);
         Assert.Equal(5000, result.BaseSalary);
         Assert.Equal(500, result.AttractionAllowance);
         Assert.Equal(200, result.TransportationAllowance);
-        Assert.Equal(30000, result.CalculatedOvertimePay); 
-        Assert.Equal(5000 + 500 + 200 + 30000, result.TotalSalary); 
+        Assert.Equal(30000, result.CalculatedOvertimePay);
+        Assert.Equal(5000 + 500 + 200 + 30000, result.TotalSalary);
 
-        _salaryRepositoryMock.Verify(repo => repo.AddAsync(It.IsAny<Salary>()), Times.Once);
+        // Assert - رفتار
+        _salaryRepositoryMock.Verify(repo => repo.AddAsync(It.Is<Salary>(s =>
+            s.EmployeeFirstName == "Test" &&
+            s.EmployeeLastName == "User" &&
+            s.BaseSalary == 5000 &&
+            s.AttractionAllowance == 500 &&
+            s.TransportationAllowance == 200 &&
+            s.CalculatedOvertimePay == 30000 &&
+            s.TotalSalary == (5000 + 500 + 200 + 30000)
+        )), Times.Once);
     }
 
     [Fact]
@@ -73,38 +84,51 @@ public class SalaryServiceTests
             AttractionAllowance = 500,
             TransportationAllowance = 200,
             CalculatedOvertimePay = 10000,
-            TotalSalary = 5700, 
-            SalaryDate = DateTime.Now
+            TotalSalary = 15700,
+            SalaryDate = new DateTime(2025, 01, 01)
         };
+
+        var paymentDate = new DateTime(2025, 01, 02);
 
         var updateData = new SalaryUpdateData
         {
             BasicSalary = 6000,
-            Allowance = 600, 
-            Transport = 250, 
-            OvertimePay = 12000, 
-            PaymentDate = DateTime.Now.AddDays(1) 
+            Allowance = 600,
+            Transport = 250,
+            OvertimePay = 12000,
+            PaymentDate = paymentDate
         };
 
         _salaryRepositoryMock.Setup(repo => repo.GetByIdAsync(1))
-                           .ReturnsAsync(existingSalary);
+                             .ReturnsAsync(existingSalary);
 
         _salaryRepositoryMock.Setup(repo => repo.UpdateAsync(It.IsAny<Salary>()))
-                           .Returns(Task.FromResult(existingSalary));
+                             .Returns(Task.CompletedTask);
 
         // Act
         var updatedSalary = await _salaryService.UpdateSalaryAsync(1, updateData);
 
-        // Assert
+        // Assert - خروجی
         Assert.NotNull(updatedSalary);
         Assert.Equal(6000, updatedSalary.BaseSalary);
         Assert.Equal(600, updatedSalary.AttractionAllowance);
         Assert.Equal(250, updatedSalary.TransportationAllowance);
         Assert.Equal(12000, updatedSalary.CalculatedOvertimePay);
-        Assert.Equal(updateData.PaymentDate.Value.Date, updatedSalary.SalaryDate.Date);  
-        Assert.Equal(6000 + 600 + 250 + 12000, updatedSalary.TotalSalary); 
+        Assert.Equal(paymentDate.Date, updatedSalary.SalaryDate.Date);
+        Assert.Equal(6000 + 600 + 250 + 12000, updatedSalary.TotalSalary);
 
-        _salaryRepositoryMock.Verify(repo => repo.UpdateAsync(It.IsAny<Salary>()), Times.Once);
+        // Assert - رفتار
+        _salaryRepositoryMock.Verify(repo => repo.GetByIdAsync(1), Times.Once);
+
+        _salaryRepositoryMock.Verify(repo => repo.UpdateAsync(It.Is<Salary>(s =>
+            s.Id == 1 &&
+            s.BaseSalary == 6000 &&
+            s.AttractionAllowance == 600 &&
+            s.TransportationAllowance == 250 &&
+            s.CalculatedOvertimePay == 12000 &&
+            s.TotalSalary == (6000 + 600 + 250 + 12000) &&
+            s.SalaryDate.Date == paymentDate.Date
+        )), Times.Once);
     }
 
     [Fact]
@@ -112,12 +136,15 @@ public class SalaryServiceTests
     {
         // Arrange
         _salaryRepositoryMock.Setup(repo => repo.DeleteAsync(1))
-                           .Returns(Task.FromResult(true)); 
+                             .Returns(Task.CompletedTask);
+
         // Act
         var result = await _salaryService.DeleteSalaryAsync(1);
 
         // Assert
-        Assert.True(result); 
+        // اگر سرویس شما bool برمی‌گرداند:
+        Assert.True(result);
+
         _salaryRepositoryMock.Verify(repo => repo.DeleteAsync(1), Times.Once);
     }
 
@@ -126,15 +153,18 @@ public class SalaryServiceTests
     {
         // Arrange
         var expectedSalary = new Salary { Id = 1, BaseSalary = 1000 };
+
         _salaryRepositoryMock.Setup(repo => repo.GetByIdAsync(1))
-                           .ReturnsAsync(expectedSalary);
+                             .ReturnsAsync(expectedSalary);
 
         // Act
         var actualSalary = await _salaryService.GetSalaryByIdAsync(1);
 
         // Assert
+        Assert.NotNull(actualSalary);
         Assert.Equal(expectedSalary.Id, actualSalary.Id);
         Assert.Equal(expectedSalary.BaseSalary, actualSalary.BaseSalary);
+
         _salaryRepositoryMock.Verify(repo => repo.GetByIdAsync(1), Times.Once);
     }
 }

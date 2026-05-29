@@ -8,7 +8,7 @@ namespace Infrastructure.Context
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
-        public DbSet<Salary> Salaries => Set<Salary>();
+        public virtual DbSet<Salary> Salaries => Set<Salary>();
     
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
